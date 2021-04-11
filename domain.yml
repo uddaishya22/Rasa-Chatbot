@@ -61,6 +61,9 @@ responses:
   - text: Would you like to subscribe to our Newsletter
   utter_doing_query:
   - text: Okay Let me check your details...
+  utter_resubscribe:
+  - text: You have already subscribed to this Newsletter with this mail id
+  
 
 slots:
   PERSON:
@@ -69,18 +72,26 @@ slots:
   email:
     type: text
     influence_conversation: false
+  user_provided_email:
+    type: bool
+    initial_value: false
+    influence_conversation: true
 
 forms:
   user_info_form:
     PERSON:
     - type: from_text
       entity: PERSON
+      intent: inform
     email:
     - type: from_text
       entity: email
+      intent: inform
 
 actions:
   - action_query_subscription
+  - action_insert_info
+
 
 session_config:
   session_expiration_time: 60

@@ -20,7 +20,7 @@ rules:
 
 - rule: Submit user_info_form
   condition: 
-  - active_loop:
+  - active_loop: user_info_form
   steps:
   - action: user_info_form
   - active_loop: null
@@ -28,12 +28,19 @@ rules:
     - requested_slot: null
   - action: utter_submit
   - action: utter_ask_confirm
+  - action: action_listen
+  - action: action_insert_info
 
 - rule: Querying into the DB
-  condition:
-  - slot_was_set:
-    - requested_slot: null
   steps:
   - intent: query_subscribed
   - action: utter_doing_query
   - action: action_query_subscription
+
+- rule: user Provided email slot filling
+  steps:
+  - intent: inform
+    entities:
+    - email: abcxyz@gmail.com
+  - slot_was_set:
+    - email: abcxyz@gmail.com

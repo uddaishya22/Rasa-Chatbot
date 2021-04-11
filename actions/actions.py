@@ -5,7 +5,7 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 
-from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List, Union
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -28,14 +28,40 @@ class ActionQuerySubscription(Action):
         slot_value = tracker.get_slot("email")
         slot_name = "email"
 
-        # if not slot_value:
-        #     dispatcher.utter_message(text=f"Enter your {slot_name} ")
+        if not slot_value:
+            dispatcher.utter_message(text="Please enter your email")
 
-        get_query_results = DbQueryingMethods.select_by_slot(conn=conn,
-                                                             slot_name=slot_name,
-                                                             slot_value=slot_value)
+        else:
+            get_query_results = DbQueryingMethods.select_by_slot(conn=conn,
+                                                                 slot_name=slot_name,
+                                                                 slot_value=slot_value)
 
-        dispatcher.utter_message(text=f"Results : {get_query_results} ")
+            dispatcher.utter_message(text=f"Results : {get_query_results} ")
+        conn.close()
+        return []
+
+
+class ActionInsertInfo(Action):
+
+    def name(self) -> Text:
+        return "action_insert_info"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        PERSON = tracker.get_slot("PERSON")
+        email = tracker.get_slot("email")
+
+        conn = DbQueryingMethods.create_connection("user-db.db")
+
+        slot_value = (PERSON, email)
+        slot_name = ('name', 'email')
+
+        insert_user_info = DbQueryingMethods.insert_by_slot(conn=conn,
+                                                            slot_name=slot_name,
+                                                            slot_value=slot_value)
+        dispatcher.utter_message(text=f"{PERSON} succesfully subscribed !!!")
         conn.close()
         return []
 
