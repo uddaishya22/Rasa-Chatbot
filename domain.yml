@@ -1,0 +1,87 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - asking_time
+  - inform
+  - request_subscription
+  - repeat_name
+  - query_subscribed
+entities:
+  - PERSON
+  - email
+  - priority
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_ask_PERSON:
+  - text: "Can I have your full name please!!!"
+
+  utter_ask_email:
+  - text: "Please provide your email address."
+
+  utter_submit:
+  - text: "Thanks for the details"
+
+  utter_ask_confirm:
+  - text: "Should I Affirm the subscription with the following details? \n    email: {email} \n    Name: {PERSON}"
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No, cancel the incident
+      payload: /deny
+
+  utter_incident_creation_done:
+  - text: Alright, I have subscribed you to our newsletter. Kindly check your mail for the confirmation.
+  utter_ask_subscription:
+  - text: Would you like to subscribe to our Newsletter
+  utter_doing_query:
+  - text: Okay Let me check your details...
+
+slots:
+  PERSON:
+    type: text
+    influence_conversation: false
+  email:
+    type: text
+    influence_conversation: false
+
+forms:
+  user_info_form:
+    PERSON:
+    - type: from_text
+      entity: PERSON
+    email:
+    - type: from_text
+      entity: email
+
+actions:
+  - action_query_subscription
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

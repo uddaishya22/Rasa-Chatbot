@@ -1,0 +1,162 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: goodbye
+  examples: |
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+- intent: asking_time
+  examples: |
+    - Tell me the time
+    - what's the time
+    - please tell me the time now
+    - what is the time right now
+    - tell me time
+
+- intent: inform
+  examples: |
+    - My name is [Uddaishya](PERSON)
+    - [abc123@gmail.com](email)
+    - my email is [test@example.com](email)
+    - my email is [abraham.lincoln@example.com](email)
+    - [name.name@example.com](email)
+    - [it is admin@example.com](email)
+    - [aileen.mottern@example.com](email)
+    - [low](priority)
+    - [medium](priority)
+    - [high](priority)
+    - it should be a [low](priority) priority
+    - it should be [medium](priority)
+    - [escalated]{"entity": "priority", "value": "high"}
+    - [escalate]{"entity": "priority", "value": "high"}
+    - [super high](priority)
+    - [john](PERSON)
+    - the priority is [high](priority)
+    - [test@gmail.com](email)
+    - [xyz@example.com](email)
+    - my email is ella@rasa.com
+    - [abraham.lincoln@example.com](email)
+    - [akash birari](PERSON)
+    - [akash123@ibm.com](email)
+    - [Surya reddy](PERSON)
+    - [reddy.surya@ibm.com](email)
+    - [abcpqr@gmail.com](email)
+    - [Rahul](PERSON)
+    - [steve](PERSON)
+    - [sara@rasa.com](PERSON)
+    - [urgent]{"entity": "priority", "value": "high"}
+    - [critical]{"entity": "priority", "value": "high"}
+    - my email id is [uddaishya@gmail.com](email)
+    - [Uddaishya](PERSON)
+    - [uddaishya22@gmail.com](email)
+    - [Rachit Sharma](PERSON)
+    - [sharma.rachit@ibm.com](email)
+    - [rahul](PERSON) singh
+    - [rahul@gmail.com](email)
+- intent: request_subscription
+  examples: |
+    - Yes, I want to subscribe to this
+    - I want subscription
+    - I want to have newsletter
+    - subscribe to the newsletter
+    - make a subscription
+    - give me the subscription
+    - make me subscribed to this
+    - i am ready to subscribe
+    - I want to take subscription
+    - can I take subscription
+    - yes subscribe me
+  
+- intent: query_subscribed
+  examples: |
+    - Do I have any subscription already.
+    - I already subscribed
+    - check my subscription
+    - Have I joined the subscription?
+    - check my details in your data.
+
+- intent: repeat_name
+  examples: |
+    - What is my name?
+    - do you remember my name?
+    - do you know my name
+    - Who am I?
