@@ -1,5 +1,4 @@
 version: "2.0"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,6 +15,7 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - Hi
 - intent: goodbye
   examples: |
     - good afternoon
@@ -29,14 +29,36 @@ nlu:
     - see you around
     - bye bye
     - see you later
+    - Bye
 - intent: affirm
   examples: |
     - yes
-    - y
+    - yes please
+    - yes I would
+    - please do
+    - yup
+    - yep
+    - that's right
     - indeed
-    - of course
-    - that sounds good
-    - correct
+    - Yes, please
+    - yeah
+    - sure
+    - yes thanks
+    - That would be great
+    - YES
+    - YUP
+    - Yea
+    - Yeah
+    - Yeah sure
+    - Yep
+    - Yep that's fine
+    - Yep!
+    - Yepp
+    - Yes
+    - Yes I do
+    - Yes please
+    - Yes please!
+    - Yes, I accept
 - intent: deny
   examples: |
     - no
@@ -46,6 +68,14 @@ nlu:
     - don't like that
     - no way
     - not really
+    - Nope
+- intent: Thankyou
+  examples: |
+    - Thankyou
+    - Thanks
+    - Thank you so much
+    - Thanks a lot
+    - thankyou
 - intent: mood_great
   examples: |
     - perfect
@@ -91,7 +121,7 @@ nlu:
     - please tell me the time now
     - what is the time right now
     - tell me time
-
+    - Time please
 - intent: inform
   examples: |
     - My name is [Uddaishya](PERSON)
@@ -132,6 +162,8 @@ nlu:
     - [sharma.rachit@ibm.com](email)
     - [rahul](PERSON) singh
     - [rahul@gmail.com](email)
+    - [Ashish Kumar](PERSON)
+    - [ashish123@gmail.com](email)
 - intent: request_subscription
   examples: |
     - Yes, I want to subscribe to this
@@ -145,18 +177,58 @@ nlu:
     - I want to take subscription
     - can I take subscription
     - yes subscribe me
-  
 - intent: query_subscribed
   examples: |
+    - Please let me know I have already subscribed.
     - Do I have any subscription already.
     - I already subscribed
     - check my subscription
     - Have I joined the subscription?
     - check my details in your data.
-
 - intent: repeat_name
   examples: |
     - What is my name?
     - do you remember my name?
     - do you know my name
     - Who am I?
+- intent: to_know_newsletter
+  examples: |
+    - Explain more about this.
+    - Give Details.
+    - Explain in detail.
+    - What is in it
+    - What's about this newsletter]
+    - Why to choose this newsletter
+    - what are the benefits of subscribing.
+    - what content it has.
+    - content in it.
+    - tell me about this newsletter
+    - What's in this newsletter
+    - what's in this newsletter
+    - I want to know about this newsletter
+    - I want to know the subscriptions
+    - Tell me more
+- intent: to_know_user
+  examples: |
+    - I want to know the details of the user
+    - show the list of users
+    - show all subscribers
+    - give me the list of user
+    - give me the list of subscribers
+    - show me all subscribers to this newsletter
+    - Who all subscribed to this newsletter
+    - show me the list of all the users subscribed
+    - subscriber list
+    - print subscriber list
+    - show me the user list
+    - user's list
+    - Show me user list
+    - user list
+    - Show me the list of all users
+    - I want list of all users
+- synonym: high
+  examples: |
+    - escalated
+    - escalate
+    - urgent
+    - critical

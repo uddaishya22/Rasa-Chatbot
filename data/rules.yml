@@ -27,8 +27,8 @@ rules:
   - slot_was_set:
     - requested_slot: null
   - action: utter_submit
-  - action: utter_ask_confirm
-  - action: action_listen
+  # - action: utter_ask_confirm
+  # - action: action_listen
   - action: action_insert_info
 
 - rule: Querying into the DB
@@ -44,3 +44,11 @@ rules:
     - email: abcxyz@gmail.com
   - slot_was_set:
     - email: abcxyz@gmail.com
+
+# - rule: ask subscription
+#   steps:
+#   - intent: to_know_newsletter
+#   - action: utter_about_newsletter
+#   - action: utter_ask_subscription
+#   - intent: affirm
+#   - action: user_info_form

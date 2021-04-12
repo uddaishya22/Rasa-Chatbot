@@ -6,6 +6,7 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_bot_help
   - intent: mood_great
   - action: utter_happy
 
@@ -13,6 +14,7 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_bot_help
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
@@ -23,8 +25,69 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_bot_help
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: Ask subscription
+  steps:
+  - intent: to_know_newsletter
+  - action: utter_about_newsletter
+  - action: utter_ask_subscription
+  - intent: affirm
+
+
+# - story: interactive_story_1
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - action: utter_bot_help
+#   - action: utter_ask_subscription
+#   - intent: affirm
+#   - action: user_info_form
+  # - active_loop: user_info_form
+  # - slot_was_set:
+  #   - requested_slot: PERSON
+  # - slot_was_set:
+  #   - PERSON: Ashish Kumar
+  # - slot_was_set:
+  #   - requested_slot: email
+  # - slot_was_set:
+  #   - email: ashish123@gmail.com
+
+  # - slot_was_set:
+  #   - requested_slot: null
+  # - active_loop: null
+  # - action: utter_submit
+  # - action: action_insert_info
+  # - action: utter_incident_creation_done
+  # - intent: Thankyou
+  # - action: utter_welcome
+  # - intent: goodbye
+  # - action: utter_goodbye
+
+- story: interactive_story_2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: to_know_user
+  - action: action_user_list
+
+- story: interactive_story_1
+  steps:
+  - intent: to_know_user
+  - action: action_user_list
+  - intent: to_know_user
+  - action: action_user_list
+  - intent: to_know_user
+  - action: action_user_list
+  - action: action_user_list
+  - action: action_user_list
+
+- story: interactive_story_2
+  steps:
+  - intent: to_know_user
+  - action: action_user_list

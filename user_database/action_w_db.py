@@ -1,4 +1,5 @@
 import sqlite3
+import re
 
 conn = sqlite3.Connection("user-db.db")
 
@@ -58,15 +59,36 @@ def create_table(conn):
     """)
 
 
-insert_by_slot(conn,
-               slot_name=('name', 'email'),
-               slot_value=('Gaurav', 'jeetu123@gmail.com')
-               )
+# insert_by_slot(conn,
+#                slot_name=('name', 'email'),
+#                slot_value=('Gaurav', 'jeetu123@gmail.com')
+#                )
 # select_by_slot(conn,
 #                slot_name="name",
 #                slot_value="Raj"
 #                )
 
-select_all(conn)
+# select_all(conn)
 
+# Make a regular expression
+# for validating an Email
+regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
+
+# Define a function for
+# for validating an Email
+
+
+def check(email):
+
+    # pass the regular expression
+    # and the string in search() method
+    if(re.search(regex, email)):
+        print("Valid Email")
+
+    else:
+        print("Invalid Email")
+
+
+email = "uddaishya@ibm.org"
+check(email=email)
 conn.close()

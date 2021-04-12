@@ -1,70 +1,27 @@
-version: "2.0"
-
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - asking_time
-  - inform
-  - request_subscription
-  - repeat_name
-  - query_subscribed
+- to_know_user
+- greet
+- affirm
+- Thankyou
+- inform
+- goodbye
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+- asking_time
+- request_subscription
+- repeat_name
+- query_subscribed
+- to_know_newsletter
 entities:
-  - PERSON
-  - email
-  - priority
-
-responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
-  utter_ask_PERSON:
-  - text: "Can I have your full name please!!!"
-
-  utter_ask_email:
-  - text: "Please provide your email address."
-
-  utter_submit:
-  - text: "Thanks for the details"
-
-  utter_ask_confirm:
-  - text: "Should I Affirm the subscription with the following details? \n    email: {email} \n    Name: {PERSON}"
-    buttons:
-    - title: Yes
-      payload: /affirm
-    - title: No, cancel the incident
-      payload: /deny
-
-  utter_incident_creation_done:
-  - text: Alright, I have subscribed you to our newsletter. Kindly check your mail for the confirmation.
-  utter_ask_subscription:
-  - text: Would you like to subscribe to our Newsletter
-  utter_doing_query:
-  - text: Okay Let me check your details...
-  utter_resubscribe:
-  - text: You have already subscribed to this Newsletter with this mail id
-  
-
+- PERSON
+- email
+- priority
 slots:
   PERSON:
     type: text
@@ -76,7 +33,64 @@ slots:
     type: bool
     initial_value: false
     influence_conversation: true
-
+responses:
+  utter_greet:
+  - text: Hello!
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_bot_help:
+  - text: I am here to give subscriptions to tht Newsletter by Uddaishya. What can I do for you?
+  utter_about_newsletter:
+  - text: To get updated in the Field of Artificial Intelligence and Machine learning. This subscription to the newslwtter will keep you update and will leverage your coding skills. You also could contribute in the under-developing usecases by our developer team. In short you will gain some experience on real industry based projects.
+  utter_ask_PERSON:
+  - text: Can I have your full name please!!!
+  utter_ask_email:
+  - text: Please provide your email address.
+  utter_submit:
+  - text: Thanks for the details
+  utter_ask_confirm:
+  - text: |-
+      Should I Affirm the subscription with the following details? 
+          email: {email} 
+          Name: {PERSON}
+    buttons:
+    - title: Yes
+      payload: /affirm
+    - title: No, cancel the incident
+      payload: /deny
+  utter_incident_creation_done:
+  - text: Alright, I have subscribed you to our newsletter. Kindly check your mail for the confirmation.
+  utter_ask_subscription:
+  - text: Would you like to subscribe to our Newsletter
+  utter_doing_query:
+  - text: Okay Let me check your details...
+  utter_resubscribe:
+  - text: You have already subscribed to this Newsletter with this mail id
+  utter_welcome:
+  - text: No Worries !!!
+  utter_out_of_scope:
+  - text: I am not getting you. Will you please rephrase?
+actions:
+- action_insert_info
+- action_query_subscription
+- action_user_list
+- utter_ask_subscription
+- utter_bot_help
+- utter_goodbye
+- utter_greet
+- utter_incident_creation_done
+- utter_submit
+- utter_welcome
+- validate_user_info_form
 forms:
   user_info_form:
     PERSON:
@@ -87,12 +101,3 @@ forms:
     - type: from_text
       entity: email
       intent: inform
-
-actions:
-  - action_query_subscription
-  - action_insert_info
-
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true

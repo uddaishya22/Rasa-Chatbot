@@ -7,11 +7,53 @@
 
 from typing import Any, Text, Dict, List, Union
 
-from rasa_sdk import Action, Tracker
+from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.types import DomainDict
 
 import sqlite3
 from rasa_sdk.events import SlotSet
+
+import re
+regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
+
+
+class ValidateUserInfoForm(FormValidationAction):
+
+    def name(self) -> Text:
+        return "validate_user_info_form"
+
+    def validate_PERSON(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict
+    ) -> Dict[Text, Any]:
+
+        print(
+            f"Name given by user is {slot_value} and have length of {len(slot_value)}")
+        if len(slot_value) <= 2:
+            dispatcher.utter_message(
+                text="That's very short name. I'm assuming you mis-spelled.")
+            return {"PERSON": None}
+        else:
+            return {"PERSON": slot_value}
+
+    def validate_email(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict
+    ) -> Dict[Text, Any]:
+
+        print(f"\nEmail provided is {slot_value}")
+        verify_mail = DbQueryingMethods.check_mailid(slot_value)
+        if verify_mail == True:
+            return {"email": slot_value}
+        else:
+            dispatcher.utter_message(text="Please, Enter a valid mail id.")
 
 
 class ActionQuerySubscription(Action):
@@ -65,8 +107,45 @@ class ActionInsertInfo(Action):
         conn.close()
         return []
 
+# for showing the list of users
+
+
+class ActionUserList(Action):
+
+    def name(self) -> Text:
+        return "action_user_list"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        conn = DbQueryingMethods.create_connection("user-db.db")
+
+        user_rows = DbQueryingMethods.select_all(conn=conn)
+        for row in user_rows:
+            dispatcher.utter_message(
+                text=f"\n==> Name: {row[0]}\t\t| Mail-id: {row[1]}")
+            print(row)
+
+        conn.close()
+        return []
+
 
 class DbQueryingMethods:
+
+    # Define a function for
+    # for validating an Email
+    def check_mailid(email):
+
+        # pass the regular expression
+        # and the string in search() method
+        if(re.search(regex, email)):
+            print("\nValid")
+            return True
+
+        else:
+            print("\nInvalid mail")
+            return False
 
     def create_connection(db_file):
         """ 
@@ -116,7 +195,7 @@ class DbQueryingMethods:
             SELECT * FROM user_info;
         """)
 
-        rows = c.fetchall()
+        return c.fetchall()
 
         for row in rows:
             print(row)
